@@ -1,0 +1,33 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "sass src/resources/sass/app.scss src/public/css/app.css --watch --style=compressed",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuquangtu-04/blog.git"
+  },
+  "keywords": [
+    "my",
+    "project"
+  ],
+  "author": "tudev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chuquangtu-04/blog/issues"
+  },
+  "homepage": "https://github.com/chuquangtu-04/blog#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}
