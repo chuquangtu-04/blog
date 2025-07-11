@@ -5,11 +5,16 @@
   "scripts": {
     "start": "nodemon --inspect src/index.js",
     "watch": "sass src/resources/sass/app.scss src/public/css/app.css --watch --style=compressed",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --print-width 80 --tab-width 4 --single-quote --trailing-comma all --write \"src/**/*.{js,json,scss}\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chuquangtu-04/blog.git"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --print-width 80 --tab-width 4 --single-quote --trailing-comma all --write"
   },
   "keywords": [
     "my",
@@ -25,9 +30,12 @@
   "dependencies": {
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
-    "nodemon": "^3.1.10"
+    "lint-staged": "^16.1.2",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "morgan": "^1.10.0",
     "sass": "^1.89.2"
   }
