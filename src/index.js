@@ -8,6 +8,9 @@ const __dirname = path.resolve();
 
 // app.use(morgan("combined"));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //Connect to db
 db.connect();
 

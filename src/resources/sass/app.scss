@@ -1,8 +1,28 @@
 @import 'variables';
-h1 {
-    color: $red-color;
-}
 
 .card-course-items {
     margin-bottom: 15px;
+    height: 400px;
+}
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Giới hạn 4 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-link {
+    text-decoration: none;
+    color: #000;
+}
+.card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Giới hạn 1 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-control {
+    width: 50%;
 }
