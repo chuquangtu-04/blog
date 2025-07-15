@@ -28,9 +28,11 @@
   "homepage": "https://github.com/chuquangtu-04/blog#readme",
   "description": "",
   "dependencies": {
+    "dayjs": "^1.11.13",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
     "lint-staged": "^16.1.2",
+    "method-override": "^3.0.0",
     "mongoose": "^8.16.3",
     "mongoose-slug-generator": "^1.0.4",
     "nodemon": "^3.1.10",

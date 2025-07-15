@@ -1,0 +1,28 @@
+<h1>Update Course</h1>
+<div class="container mt-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tên Khóa Họ</th>
+        <th scope="col">Trình Độ</th>
+        <th scope="col" colspan="3">Thời Gian Tạo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each courses}}
+        <tr>
+          <th scope="row">{{count @index}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.lever}}</td>
+          <td>{{formatDate this.createdAt}}</td>
+          <td><a
+              href="/courses/{{this._id}}/edit"
+              class="btn btn-link"
+            >Sửa</a></td>
+          <td><a href="#" class="btn btn-link">Xóa</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

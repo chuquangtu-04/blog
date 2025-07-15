@@ -28,5 +28,24 @@ class courseController {
             err.message; // '#sadpanda'
         }
     }
+    async edit(req, res) {
+        try {
+            const courses = await Course.findById(req.params.id).exec();
+            res.render('courses/edit', {
+                courses: mongoose.mongooseToObject(courses),
+            });
+        } catch (error) {
+            next(error);
+        }
+        res.render('courses/edit');
+    }
+    async update(req, res, next) {
+        try {
+            await Course.updateOne({ _id: req.params.id }, req.body);
+            res.redirect('/me/stored/courses');
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 export default new courseController();

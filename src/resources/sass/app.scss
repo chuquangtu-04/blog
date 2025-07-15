@@ -26,3 +26,11 @@
 .form-control {
     width: 50%;
 }
+.dropdown-menu[data-bs-popper] {
+    left: -36px !important;
+}
+.header-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}

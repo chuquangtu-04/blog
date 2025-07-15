@@ -1,4 +1,7 @@
 import express from 'express';
+import dayjs from 'dayjs';
+import methodOverride from 'method-override';
+
 import { engine } from 'express-handlebars';
 import path from 'path';
 import { db } from './config/db/index.js';
@@ -10,11 +13,21 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 //Connect to db
 db.connect();
 
-app.engine('.hbs', engine({ extname: '.hbs' }));
+app.engine(
+    '.hbs',
+    engine({
+        extname: '.hbs',
+        helpers: {
+            count: (aString) => aString + 1,
+            formatDate: (date) => dayjs(date).format('DD/MM/YYYY HH:mm:ss'),
+        },
+    }),
+);
 app.set('view engine', '.hbs');
 app.set('views', './src/resources/views');
 
