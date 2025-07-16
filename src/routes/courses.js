@@ -8,6 +8,9 @@ router.post('/store', courseController.store);
 router.get('/:id/edit', courseController.edit);
 //Sửa Khóa Học
 
+router.delete('/:id', courseController.delete);
+//delete Khóa Học trên DB
+
 router.put('/:id', courseController.update);
 //Sửa Khóa Học trên DB
 

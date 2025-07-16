@@ -3,7 +3,7 @@ import mongoose from '../../util/mongoose.js';
 
 class courseController {
     //GET Course detail
-    async show(req, res) {
+    async show(req, res, next) {
         try {
             const detail_course = await Course.findOne({
                 slug: req.params.slug,
@@ -15,20 +15,19 @@ class courseController {
             next(error);
         }
     }
-    create(req, res) {
+    create(req, res, next) {
         res.render('courses/create');
     }
-    async store(req, res) {
-        // res.json(req.body);
-        const course = new Course(req.body);
+    async store(req, res, next) {
         try {
+            const course = new Course(req.body);
             await course.save();
             res.redirect('/');
-        } catch (err) {
-            err.message; // '#sadpanda'
+        } catch (error) {
+            next(error);
         }
     }
-    async edit(req, res) {
+    async edit(req, res, next) {
         try {
             const courses = await Course.findById(req.params.id).exec();
             res.render('courses/edit', {
@@ -37,12 +36,20 @@ class courseController {
         } catch (error) {
             next(error);
         }
-        res.render('courses/edit');
     }
     async update(req, res, next) {
         try {
             await Course.updateOne({ _id: req.params.id }, req.body);
             res.redirect('/me/stored/courses');
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async delete(req, res, next) {
+        try {
+            await Course.deleteOne({ _id: req.params.id });
+            res.redirect('back');
         } catch (error) {
             next(error);
         }
