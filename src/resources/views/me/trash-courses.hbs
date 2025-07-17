@@ -9,7 +9,7 @@
         <th scope="col">#</th>
         <th scope="col">Tên Khóa Họ</th>
         <th scope="col">Trình Độ</th>
-        <th scope="col" colspan="3">Thời Gian Tạo</th>
+        <th scope="col" colspan="3">Thời Gian Xóa</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
           <th scope="row">{{count @index}}</th>
           <td>{{this.name}}</td>
           <td>{{this.lever}}</td>
-          <td>{{formatDate this.createdAt}}</td>
+          <td>{{formatDate this.deletedAt}}</td>
           <td><a
               href=""
               name="restore"
