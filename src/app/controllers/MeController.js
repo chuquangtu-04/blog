@@ -12,5 +12,16 @@ class MeController {
             next(error);
         }
     }
+    async trashController(req, res, next) {
+        try {
+            const courses = await Course.findWithDeleted({ deleted: true });
+
+            res.render('me/trash-courses', {
+                courses: mongoose.multipleMongooseToObject(courses),
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 export default new MeController();

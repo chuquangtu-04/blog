@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
+import mongooseDelete from 'mongoose-delete';
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
@@ -23,4 +24,10 @@ Course.pre('save', function (next) {
     }
     next();
 });
+Course.plugin(mongooseDelete, {
+    deleted: true,
+    deletedAt: true,
+    overrideMethods: 'all',
+});
+
 export default mongoose.model('Course', Course);

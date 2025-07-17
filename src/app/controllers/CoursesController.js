@@ -48,8 +48,24 @@ class courseController {
 
     async delete(req, res, next) {
         try {
+            await Course.delete({ _id: req.params.id });
+            res.redirect('/me/stored/courses');
+        } catch (error) {
+            next(error);
+        }
+    }
+    async restore(req, res, next) {
+        try {
+            await Course.restore({ _id: req.params.id });
+            res.redirect('/me/trash/courses');
+        } catch (error) {
+            next(error);
+        }
+    }
+    async forceDelete(req, res, next) {
+        try {
             await Course.deleteOne({ _id: req.params.id });
-            res.redirect('back');
+            res.redirect('/me/trash/courses');
         } catch (error) {
             next(error);
         }

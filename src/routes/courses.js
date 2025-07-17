@@ -11,6 +11,12 @@ router.get('/:id/edit', courseController.edit);
 router.delete('/:id', courseController.delete);
 //delete Khóa Học trên DB
 
+router.patch('/:id/restore', courseController.restore);
+//Restore Khóa Học trên DB
+
+router.delete('/:id/forceDelete', courseController.forceDelete);
+//Restore Khóa Học trên DB
+
 router.put('/:id', courseController.update);
 //Sửa Khóa Học trên DB
 
