@@ -70,5 +70,20 @@ class courseController {
             next(error);
         }
     }
+
+    async handleFromAction(req, res, next) {
+        try {
+            switch (req.body.action) {
+                case 'delete':
+                    await Course.delete({ _id: { $in: req.body.courseIds } });
+                    res.redirect('/me/stored/courses');
+                    break;
+                default:
+                    res.json({ message: 'Action invalid' });
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 export default new courseController();
