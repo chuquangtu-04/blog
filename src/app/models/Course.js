@@ -5,7 +5,7 @@ import mongooseDelete from 'mongoose-delete';
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const Course = new Schema(
+const courseSchema = new Schema(
     {
         name: { type: String, required: true },
         description: { type: String },
@@ -18,16 +18,27 @@ const Course = new Schema(
         timestamps: true,
     },
 );
-Course.pre('save', function (next) {
+courseSchema.pre('save', function (next) {
     if (this.isModified('name')) {
         this.slug = slugify(this.name, { lower: true, strict: true });
     }
     next();
 });
-Course.plugin(mongooseDelete, {
+
+courseSchema.query.sortStable = function (normalObject, isValidType) {
+    if (normalObject.hasOwnProperty('_sort')) {
+        return this.sort({
+            [normalObject.column]: isValidType ? normalObject.type : 'desc',
+        });
+    }
+
+    return this;
+};
+
+courseSchema.plugin(mongooseDelete, {
     deleted: true,
     deletedAt: true,
     overrideMethods: 'all',
 });
 
-export default mongoose.model('Course', Course);
+export default mongoose.model('Course', courseSchema);

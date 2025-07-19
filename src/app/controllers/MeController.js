@@ -10,15 +10,11 @@ class MeController {
             let coursesPromise = Course.find({});
             const normalObject = Object.assign({}, req.query);
 
-            if (normalObject.hasOwnProperty('_sort')) {
-                coursesPromise = coursesPromise.sort({
-                    [normalObject.column]: normalObject.type,
-                });
-            }
+            const isValidType = ['desc', 'asc'].includes(normalObject.type);
 
             const [countCoursesDeleted, courses] = await Promise.all([
                 CoursesDeletedPromise,
-                coursesPromise,
+                coursesPromise.sortStable(normalObject, isValidType),
             ]);
 
             res.render('me/stored-courses', {

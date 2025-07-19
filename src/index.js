@@ -1,11 +1,13 @@
 import express from 'express';
-import dayjs from 'dayjs';
 import methodOverride from 'method-override';
 import sortMiddleware from './app/middleware/sortMiddleware.js';
+import dayjs from 'dayjs';
+import Handlebars from 'handlebars';
 
 import { engine } from 'express-handlebars';
 import path from 'path';
 import { db } from './config/db/index.js';
+import handlebars from './helpers/handlebars.js';
 import route from './routes/index.js';
 const app = express();
 const __dirname = path.resolve();
@@ -26,28 +28,7 @@ app.engine(
     '.hbs',
     engine({
         extname: '.hbs',
-        helpers: {
-            count: (aString) => aString + 1,
-            formatDate: (date) => dayjs(date).format('DD/MM/YYYY HH:mm:ss'),
-            sortable: (name, sort) => {
-                const sortType = sort.column === name ? sort.type : 'default';
-                const icons = {
-                    default: 'fa-solid fa-sort',
-                    asc: 'fa-solid fa-arrow-up-short-wide',
-                    desc: 'fa-solid fa-arrow-up-wide-short',
-                };
-                const types = {
-                    default: 'desc',
-                    asc: 'desc',
-                    desc: 'asc',
-                };
-                const icon = icons[sortType];
-                const type = types[sortType];
-                return `<a href="?_sort&column=${name}&type=${type}">
-            <i class="${icon}"></i>
-          </a>`;
-            },
-        },
+        helpers: handlebars(dayjs, Handlebars),
     }),
 );
 app.set('view engine', '.hbs');

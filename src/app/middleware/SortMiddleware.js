@@ -1,5 +1,6 @@
 module.exports = function sortMiddleware(req, res, next) {
     const normalObject = Object.assign({}, req.query);
+    const isValidType = ['desc', 'asc'].includes(normalObject.type);
     res.locals._sort = {
         enabled: false,
         type: 'default',
@@ -11,7 +12,7 @@ module.exports = function sortMiddleware(req, res, next) {
         // res.locals._sort.column = normalObject.column;
         Object.assign(res.locals._sort, {
             enabled: true,
-            type: normalObject.type,
+            type: isValidType ? normalObject.type : 'desc',
             column: normalObject.column,
         });
     }
