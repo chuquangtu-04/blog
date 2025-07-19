@@ -7,7 +7,14 @@ class MeController {
             const CoursesDeletedPromise = Course.countDocumentsWithDeleted({
                 deleted: true,
             });
-            const coursesPromise = Course.find({});
+            let coursesPromise = Course.find({});
+            const normalObject = Object.assign({}, req.query);
+
+            if (normalObject.hasOwnProperty('_sort')) {
+                coursesPromise = coursesPromise.sort({
+                    [normalObject.column]: normalObject.type,
+                });
+            }
 
             const [countCoursesDeleted, courses] = await Promise.all([
                 CoursesDeletedPromise,

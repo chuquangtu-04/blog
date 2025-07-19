@@ -1,8 +1,12 @@
 <form class="container mt-4" method="POST" action="/courses/handle-from-action">
   <div class="d-flex justify-content-between align-items-center">
     <h1>Update Course</h1>
-    <a href="/me/trash/courses" class="d-inline-block text-decoration-none">
+    <a
+      href="/me/trash/courses"
+      class="d-inline-block text-decoration-none text-dark"
+    >
       <p>
+        <i class="fa-solid fa-trash"></i>
         Thùng rác ({{countCoursesDeleted}})
       </p>
     </a>
@@ -37,10 +41,19 @@
   <table class="table">
     <thead>
       <tr>
+        <th></th>
         <th scope="col">#</th>
-        <th scope="col">Tên Khóa Họ</th>
-        <th scope="col">Trình Độ</th>
-        <th scope="col" colspan="4">Thời Gian Tạo</th>
+        <th scope="col">Tên Khóa Học
+          {{{sortable "name" _sort}}}
+        </th>
+        <th scope="col">Trình Độ
+          {{{sortable "lever" _sort}}}
+
+        </th>
+        <th scope="col" colspan="4">Thời Gian Tạo
+          {{{sortable "createAt" _sort}}}
+
+        </th>
       </tr>
     </thead>
     <tbody>
