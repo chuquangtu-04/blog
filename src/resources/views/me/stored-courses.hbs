@@ -42,7 +42,10 @@
     <thead>
       <tr>
         <th></th>
-        <th scope="col">#</th>
+        <th scope="col">ID
+          {{{sortable "_id" _sort}}}
+
+        </th>
         <th scope="col">Tên Khóa Học
           {{{sortable "name" _sort}}}
         </th>
@@ -68,7 +71,7 @@
                 value="{{this._id}}"
               />
             </div></th>
-          <th scope="row">{{count @index}}</th>
+          <th scope="row">{{this._id}}</th>
           <td>{{this.name}}</td>
           <td>{{this.lever}}</td>
           <td>{{formatDate this.createdAt}}</td>

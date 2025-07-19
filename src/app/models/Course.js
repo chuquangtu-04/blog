@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import mongooseSequence from 'mongoose-sequence';
+
+const AutoIncrement = mongooseSequence(mongoose);
 import slugify from 'slugify';
 import mongooseDelete from 'mongoose-delete';
 
@@ -7,6 +10,7 @@ const ObjectId = Schema.ObjectId;
 
 const courseSchema = new Schema(
     {
+        _id: { type: Number },
         name: { type: String, required: true },
         description: { type: String },
         image: { type: String },
@@ -15,6 +19,7 @@ const courseSchema = new Schema(
         slug: { type: String, unique: true },
     },
     {
+        _id: false,
         timestamps: true,
     },
 );
@@ -40,5 +45,6 @@ courseSchema.plugin(mongooseDelete, {
     deletedAt: true,
     overrideMethods: 'all',
 });
+courseSchema.plugin(AutoIncrement);
 
 export default mongoose.model('Course', courseSchema);
